@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | Coelho Style</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:#000;color:#fff;overflow-x:hidden}
+:root{--primary:#ff1744;--gold:#ffd700;--accent:#111;--text:#fff;--red:#ff4444}
+
+.admin-container{min-height:100vh;padding:40px 30px;background:var(--accent)}
+.admin-header{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;margin-bottom:60px;padding-bottom:30px;border-bottom:2px solid var(--gold)}
+.admin-title{font-family:'Bebas Neue';font-size:3rem;letter-spacing:4px;background:linear-gradient(135deg,var(--primary),var(--gold));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.back-btn{display:flex;align-items:center;gap:10px;padding:12px 20px;background:var(--primary);color:#000;border:none;border-radius:20px;cursor:pointer;font-weight:600;font-family:'Bebas Neue';font-size:1rem;letter-spacing:1px;transition:all 0.3s;text-decoration:none}
+.back-btn:hover{transform:scale(1.05);box-shadow:0 10px 30px rgba(255,23,68,0.4)}
+
+.products-container{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:40px}
+
+.product-editor{padding:40px;background:var(--accent);border-radius:25px;border:2px solid var(--gold);box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.editor-title{font-family:'Bebas Neue';font-size:2.2rem;color:var(--primary);margin-bottom:30px;letter-spacing:2px}
+.form-group{display:flex;flex-direction:column;gap:10px;margin-bottom:25px}
+.form-group label{font-weight:600;color:#ccc;font-size:1rem}
+.form-group input{padding:15px 20px;background:#222;border:1px solid var(--gold);border-radius:15px;color:var(--text);font-size:1rem;transition:all 0.3s;font-family:'Poppins'}
+.form-group input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 20px rgba(255,23,68,0.3)}
+.form-group textarea{padding:15px 20px;background:#222;border:1px solid var(--gold);border-radius:15px;color:var(--text);font-size:1rem;resize:vertical;min-height:100px;font-family:'Poppins'}
+.form-group textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 20px rgba(255,23,68,0.3)}
+
+.save-btn{width:100%;padding:18px;background:linear-gradient(135deg,var(--primary),var(--red));color:#000;border:none;border-radius:20px;font-family:'Bebas Neue';font-size:1.2rem;font-weight:600;letter-spacing:2px;cursor:pointer;transition:all 0.3s;box-shadow:0 10px 30px rgba(255,23,68,0.4);margin-bottom:20px}
+.save-btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(255,23,68,0.6)}
+
+.product-preview{margin-top:30px;padding:25px;background:#111;border-radius:15px;border-left:4px solid var(--gold)}
+.preview-title{font-weight:600;margin-bottom:15px;color:var(--gold);font-size:1.1rem}
+.preview-content{color:#ddd;line-height:1.6;font-size:1rem}
+.preview-line{margin-bottom:10px;display:flex;justify-content:space-between}
+.preview-label{color:var(--gold);font-weight:600}
+
+.add-product-btn{position:fixed;bottom:40px;right:40px;width:70px;height:70px;background:linear-gradient(135deg,var(--primary),var(--red));border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;color:#000;cursor:pointer;box-shadow:0 10px 40px rgba(255,23,68,0.5);transition:all 0.3s;z-index:100}
+.add-product-btn:hover{transform:scale(1.1);box-shadow:0 15px 50px rgba(255,23,68,0.7)}
+
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:2000;justify-content:center;align-items:center;padding:20px}
+.modal-content{background:var(--accent);border:2px solid var(--gold);border-radius:25px;padding:40px;max-width:500px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.8)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2px solid var(--gold)}
+.modal-title{font-family:'Bebas Neue';font-size:1.8rem;color:var(--primary);letter-spacing:2px}
+.close-modal{font-size:30px;cursor:pointer;color:var(--gold);transition:all 0.3s}
+.close-modal:hover{color:var(--primary)}
+
+@media(max-width:768px){
+.admin-header{flex-direction:column;gap:20px;align-items:flex-start}
+.products-container{grid-template-columns:1fr}
+.add-product-btn{width:60px;height:60px;font-size:30px;bottom:20px;right:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="admin-container">
+<div class="admin-header">
+<h1 class="admin-title">
+<i class="fas fa-cog"></i> Painel Admin
+</h1>
+<a href="index.html" class="back-btn">
+<i class="fas fa-arrow-left"></i> Ir para Loja
+</a>
+</div>
+
+<div class="products-container" id="productsContainer">
+<!-- Produtos serão carregados aqui -->
+</div>
+</div>
+
+<!-- Modal para adicionar produto -->
+<div class="modal" id="addProductModal">
+<div class="modal-content">
+<div class="modal-header">
+<h2 class="modal-title">Novo Produto</h2>
+<i class="fas fa-times close-modal" onclick="closeModal()"></i>
+</div>
+<div class="form-group">
+<label>Nome:</label>
+<input type="text" id="newProdName" placeholder="Ex: Oversize Tee">
+</div>
+<div class="form-group">
+<label>Preço (R$):</label>
+<input type="number" id="newProdPrice" placeholder="189" step="0.01">
+</div>
+<div class="form-group">
+<label>Imagem URL:</label>
+<input type="url" id="newProdImage" placeholder="https://...">
+</div>
+<div class="form-group">
+<label>Ícone (Font Awesome):</label>
+<input type="text" id="newProdIcon" placeholder="fa-shirt" value="fa-shirt">
+</div>
+<button class="save-btn" onclick="addProduct()">Adicionar Produto</button>
+</div>
+</div>
+
+<!-- Botão flutuante para adicionar produto -->
+<button class="add-product-btn" onclick="openModal()" title="Adicionar novo produto">
+<i class="fas fa-plus"></i>
+</button>
+
+<script>
+// Dados dos produtos
+let products = [
+{id: 1, name: 'Oversize Tee', price: 189, image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500', icon: 'fa-shirt'},
+{id: 2, name: 'Hoodie Cargo', price: 299, image: 'https://images.unsplash.com/photo-1587563871167-1ee9c731a7f0?w=500', icon: 'fa-hoodie'},
+{id: 3, name: 'Cargo Pants', price: 249, image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500', icon: 'fa-pants'}
+];
+
+// Carregar produtos do localStorage
+function loadProducts() {
+const saved = localStorage.getItem('coelhoProducts');
+if (saved) products = JSON.parse(saved);
+renderProducts();
+}
+
+// Renderizar produtos
+function renderProducts() {
+const container = document.getElementById('productsContainer');
+container.innerHTML = products.map(product => `
+<div class="product-editor">
+<h3 class="editor-title">${product.name}</h3>
+<div class="form-group">
+<label>Nome:</label>
+<input type="text" value="${product.name}" onchange="updateProduct(${product.id}, 'name', this.value)">
+</div>
+<div class="form-group">
+<label>Preço (R$):</label>
+<input type="number" value="${product.price}" step="0.01" onchange="updateProduct(${product.id}, 'price', parseFloat(this.value))">
+</div>
+<div class="form-group">
+<label>Imagem URL:</label>
+<input type="url" value="${product.image}" onchange="updateProduct(${product.id}, 'image', this.value)">
+</div>
+<div class="form-group">
+<label>Ícone (Font Awesome):</label>
+<input type="text" value="${product.icon}" onchange="updateProduct(${product.id}, 'icon', this.value)">
+</div>
+<button class="save-btn" onclick="saveProduct(${product.id})">Salvar Alterações</button>
+<button class="save-btn" style="background:linear-gradient(135deg,#666,#444)" onclick="deleteProduct(${product.id})">
+<i class="fas fa-trash"></i> Deletar
+</button>
+<div class="product-preview">
+<div class="preview-title">Pré-visualização:</div>
+<div class="preview-content">
+<div class="preview-line">
+<span class="preview-label">Nome:</span>
+<span>${product.name}</span>
+</div>
+<div class="preview-line">
+<span class="preview-label">Preço:</span>
+<span>R$ ${product.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
+</div>
+<div class="preview-line">
+<span class="preview-label">Ícone:</span>
+<span><i class="fas ${product.icon}"></i></span>
+</div>
+</div>
+</div>
+</div>
+`).join('');
+}
+
+// Atualizar produto em tempo real
+function updateProduct(id, field, value) {
+const product = products.find(p => p.id === id);
+if (product) {
+product[field] = value;
+}
+}
+
+// Salvar produto
+function saveProduct(id) {
+localStorage.setItem('coelhoProducts', JSON.stringify(products));
+alert('✅ Produto salvo com sucesso!');
+}
+
+// Deletar produto
+function deleteProduct(id) {
+if (confirm('Tem certeza que quer deletar este produto?')) {
+products = products.filter(p => p.id !== id);
+localStorage.setItem('coelhoProducts', JSON.stringify(products));
+renderProducts();
+alert('❌ Produto deletado!');
+}
+}
+
+// Abrir modal
+function openModal() {
+document.getElementById('addProductModal').style.display = 'flex';
+}
+
+// Fechar modal
+function closeModal() {
+document.getElementById('addProductModal').style.display = 'none';
+}
+
+// Adicionar novo produto
+function addProduct() {
+const name = document.getElementById('newProdName').value;
+const price = parseFloat(document.getElementById('newProdPrice').value);
+const image = document.getElementById('newProdImage').value;
+const icon = document.getElementById('newProdIcon').value;
+
+if (!name || !price || !image) {
+alert('Preencha todos os campos!');
+return;
+}
+
+const newId = Math.max(...products.map(p => p.id), 0) + 1;
+products.push({id: newId, name, price, image, icon});
+localStorage.setItem('coelhoProducts', JSON.stringify(products));
+
+// Limpar formulário
+document.getElementById('newProdName').value = '';
+document.getElementById('newProdPrice').value = '';
+document.getElementById('newProdImage').value = '';
+document.getElementById('newProdIcon').value = 'fa-shirt';
+
+closeModal();
+renderProducts();
+alert('✅ Produto adicionado!');
+}
+
+// Fechar modal ao clicar fora
+document.getElementById('addProductModal').addEventListener('click', (e) => {
+if (e.target.id === 'addProductModal') closeModal();
+});
+
+// Inicializar
+document.addEventListener('DOMContentLoaded', loadProducts);
+</script>
+</body>
+</html>

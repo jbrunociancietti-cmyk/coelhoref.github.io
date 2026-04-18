@@ -41,23 +41,6 @@ body{font-family:'Poppins',sans-serif;background:#000;color:#fff;overflow-x:hidd
 .section-subtitle{font-size:1.4rem;color:#888;max-width:700px;margin:0 auto;letter-spacing:1px}
 .products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:50px;max-width:1400px;margin:0 auto;padding:0 30px}
 
-/* ADMIN PANEL */
-.admin-panel{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);z-index:3000;overflow-y:auto;padding:100px 30px 30px}
-.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:50px;padding-bottom:30px;border-bottom:2px solid var(--gold)}
-.admin-title{font-family:'Bebas Neue';font-size:3rem;letter-spacing:4px;background:linear-gradient(135deg,var(--primary),var(--gold));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.close-admin{font-size:40px;cursor:pointer;color:var(--gold);transition:all 0.3s}
-.close-admin:hover{color:var(--primary)}
-.product-editor{margin-bottom:60px;padding:30px;background:var(--accent);border-radius:25px;border:1px solid var(--gold)}
-.editor-title{font-family:'Bebas Neue';font-size:2rem;color:var(--primary);margin-bottom:20px;letter-spacing:2px}
-.form-group{display:flex;gap:20px;align-items:center;margin-bottom:25px;flex-wrap:wrap}
-.form-group label{font-weight:600;color:#ccc;min-width:120px}
-.form-group input{padding:15px 20px;background:#222;border:1px solid var(--gold);border-radius:15px;color:var(--text);font-size:1.1rem;flex:1;max-width:300px;transition:all 0.3s}
-.form-group input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 20px rgba(255,23,68,0.3)}
-.save-btn{padding:15px 40px;background:linear-gradient(135deg,var(--primary),var(--red));color:#000;border:none;border-radius:20px;font-family:'Bebas Neue';font-size:1.2rem;font-weight:600;letter-spacing:2px;cursor:pointer;transition:all 0.3s;box-shadow:0 10px 30px rgba(255,23,68,0.4)}
-.save-btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(255,23,68,0.6)}
-.product-preview{margin-top:30px;padding:20px;background:#111;border-radius:15px;border-left:4px solid var(--gold)}
-.preview-title{font-weight:600;margin-bottom:10px;color:var(--gold)}
-
 /* PRODUCT CARD */
 .product-card{background:var(--accent);border-radius:25px;overflow:hidden;box-shadow:0 25px 80px rgba(0,0,0,0.5);transition:all 0.5s;cursor:pointer;border:1px solid rgba(255,215,0,0.2)}
 .product-card:hover{transform:translateY(-25px) rotateX(5deg);box-shadow:0 50px 120px rgba(255,23,68,0.4);border-color:var(--gold)}
@@ -127,89 +110,14 @@ Coelho Style
 <a href="#about" class="nav-link">Sobre</a>
 <a href="#contact" class="nav-link">Contato</a>
 </nav>
-<div style="display:flex;gap:30px;align-items:center">
 <div class="cart-icon" onclick="toggleCart()">
 <i class="fas fa-shopping-bag"></i>
 <span class="cart-count" id="cartCount">0</span>
 </div>
-<div class="admin-toggle" onclick="toggleAdmin()">
-<i class="fas fa-cog"></i>
-<span class="admin-badge">ADMIN</span>
-</div>
-</div>
 </div>
 </header>
 
-<!-- ADMIN PANEL -->
-<div class="admin-panel" id="adminPanel">
-<div class="admin-header">
-<h1 class="admin-title">Painel Admin</h1>
-<i class="fas fa-times close-admin" onclick="toggleAdmin()"></i>
-</div>
 
-<div class="product-editor">
-<h3 class="editor-title">Editar Produto 1</h3>
-<div class="form-group">
-<label>Nome:</label>
-<input type="text" id="prod1-name" value="Oversize Tee">
-</div>
-<div class="form-group">
-<label>Preço (R$):</label>
-<input type="number" id="prod1-price" value="189" step="0.01">
-</div>
-<div class="form-group">
-<label>Imagem URL:</label>
-<input type="url" id="prod1-image" value="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500">
-</div>
-<button class="save-btn" onclick="saveProduct(1)">Salvar Produto 1</button>
-<div class="product-preview">
-<div class="preview-title">Pré-visualização:</div>
-<div id="prod1-preview" style="font-size:1.1rem;color:var(--gold)">Oversize Tee - R$ 189,00</div>
-</div>
-</div>
-
-<div class="product-editor">
-<h3 class="editor-title">Editar Produto 2</h3>
-<div class="form-group">
-<label>Nome:</label>
-<input type="text" id="prod2-name" value="Hoodie Cargo">
-</div>
-<div class="form-group">
-<label>Preço (R$):</label>
-<input type="number" id="prod2-price" value="299" step="0.01">
-</div>
-<div class="form-group">
-<label>Imagem URL:</label>
-<input type="url" id="prod2-image" value="https://images.unsplash.com/photo-1587563871167-1ee9c731a7f0?w=500">
-</div>
-<button class="save-btn" onclick="saveProduct(2)">Salvar Produto 2</button>
-<div class="product-preview">
-<div class="preview-title">Pré-visualização:</div>
-<div id="prod2-preview" style="font-size:1.1rem;color:var(--gold)">Hoodie Cargo - R$ 299,00</div>
-</div>
-</div>
-
-<div class="product-editor">
-<h3 class="editor-title">Editar Produto 3</h3>
-<div class="form-group">
-<label>Nome:</label>
-<input type="text" id="prod3-name" value="Cargo Pants">
-</div>
-<div class="form-group">
-<label>Preço (R$):</label>
-<input type="number" id="prod3-price" value="249" step="0.01">
-</div>
-<div class="form-group">
-<label>Imagem URL:</label>
-<input type="url" id="prod3-image" value="https://images.unsplash.com/photo-1542272604-787c3835535d?w=500">
-</div>
-<button class="save-btn" onclick="saveProduct(3)">Salvar Produto 3</button>
-<div class="product-preview">
-<div class="preview-title">Pré-visualização:</div>
-<div id="prod3-preview" style="font-size:1.1rem;color:var(--gold)">Cargo Pants - R$ 249,00</div>
-</div>
-</div>
-</div>
 
 <!-- HERO -->
 <section class="hero" id="home">
@@ -253,38 +161,11 @@ Explorar Coleção
 </div>
 
 <script>
-// Dados dos produtos
-let products = [
-{id: 1, name: 'Oversize Tee', price: 189, image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500', icon: 'fa-shirt'},
-{id: 2, name: 'Hoodie Cargo', price: 299, image: 'https://images.unsplash.com/photo-1587563871167-1ee9c731a7f0?w=500', icon: 'fa-hoodie'},
-{id: 3, name: 'Cargo Pants', price: 249, image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500', icon: 'fa-pants'}
-];
-
-let cart = [];
-
 // Carregar produtos do localStorage
 function loadProducts() {
 const saved = localStorage.getItem('coelhoProducts');
 if (saved) products = JSON.parse(saved);
 renderProducts();
-}
-
-// Salvar produto do painel admin
-function saveProduct(id) {
-const name = document.getElementById(`prod${id}-name`).value;
-const price = parseFloat(document.getElementById(`prod${id}-price`).value);
-const image = document.getElementById(`prod${id}-image`).value;
-
-const product = products.find(p => p.id === id);
-if (product) {
-product.name = name;
-product.price = price;
-product.image = image;
-localStorage.setItem('coelhoProducts', JSON.stringify(products));
-document.getElementById(`prod${id}-preview`).textContent = `${name} - R$ ${price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
-renderProducts();
-alert('Produto atualizado com sucesso!');
-}
 }
 
 // Renderizar produtos
@@ -363,12 +244,6 @@ cartCount.textContent = cart.length;
 
 const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 document.getElementById('cartTotal').textContent = `R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
-}
-
-// Alternar painel admin
-function toggleAdmin() {
-document.getElementById('adminPanel').style.display = 
-document.getElementById('adminPanel').style.display === 'block' ? 'none' : 'block';
 }
 
 // Alternar carrinho

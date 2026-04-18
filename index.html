@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coelho Style | Streetwear Urbano | @coelhostyle</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:#000;color:#fff;overflow-x:hidden}
+:root{--primary:#ff1744;--gold:#ffd700;--accent:#111;--text:#fff;--red:#ff4444}
+
+/* HEADER */
+.header{position:fixed;top:0;left:0;right:0;background:rgba(0,0,0,0.98);backdrop-filter:blur(20px);z-index:1000;padding:15px 0;border-bottom:2px solid var(--gold)}
+.header-content{max-width:1400px;margin:0 auto;padding:0 30px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:36px;font-weight:400;letter-spacing:3px;background:linear-gradient(135deg,var(--primary),var(--gold));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo-icon{font-size:32px;margin-right:10px;color:var(--gold)}
+.nav-links{display:flex;gap:40px}
+.nav-link{color:var(--text);text-decoration:none;font-weight:500;font-size:15px;transition:all 0.3s;letter-spacing:1px;position:relative}
+.nav-link:hover{color:var(--primary)}
+.nav-link:hover::after{content:'';position:absolute;bottom:-5px;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--primary),var(--gold))}
+.admin-toggle{display:flex;align-items:center;gap:15px;background:var(--accent);padding:12px 20px;border-radius:30px;cursor:pointer;transition:all 0.3s;border:1px solid var(--gold)}
+.admin-toggle:hover{background:var(--primary)}
+.admin-badge{background:var(--primary);color:#000;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600}
+.cart-icon{font-size:24px;color:var(--gold);cursor:pointer;transition:all 0.3s;position:relative}
+.cart-icon:hover{color:var(--primary)}
+.cart-count{position:absolute;top:-10px;right:-10px;background:var(--primary);color:#000;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+
+/* HERO */
+.hero{min-height:100vh;background:linear-gradient(135deg,rgba(255,23,68,0.1),rgba(255,215,0,0.1)),url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMDAwIiB2aWV3Qm94PSIwIDAgMTYwMCAxMDAwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxMDAwIiBmaWxsPSIjMDAwMDAwIi8+CjxjaXJjbGUgY3g9IjQwMCIgY3k9IjQwMCIgcj0iMjUwIiBmaWxsPSJ1cmwoI2dyYWQpIi8+CjxjaXJjbGUgY3g9IjEyMDAiIGN5PSI4MDAiIHI9IjE4MCIgZmlsbD0idXJsKCNncmFkMikiLz4KPGNpcmNsZSBjeD0iNjAwIiBjeT0iNjAwIiByPSIxMDAiIGZpbGw9IiNmZjE3NDQiLz4KPC9zdmc+');background-size:cover;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:150px 40px 100px;position:relative}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,10rem);font-weight:400;letter-spacing:5px;margin-bottom:20px;text-shadow:0 10px 40px rgba(255,23,68,0.8);color:var(--text)}
+.hero-subtitle{font-size:clamp(1.4rem,4vw,2.5rem);font-weight:300;letter-spacing:2px;margin-bottom:50px;max-width:800px;opacity:0.95;color:#ccc}
+.hero-cta{display:inline-flex;align-items:center;gap:20px;padding:25px 50px;background:var(--accent);color:var(--text);font-size:1.4rem;font-weight:600;border-radius:50px;letter-spacing:2px;text-transform:uppercase;transition:all 0.4s;box-shadow:0 20px 50px rgba(0,0,0,0.8);border:2px solid var(--gold);cursor:pointer}
+.hero-cta:hover{transform:translateY(-8px);background:var(--primary);box-shadow:0 30px 70px rgba(255,23,68,0.6);color:#000}
+
+/* PRODUCTS */
+.products{padding:120px 0;background:var(--accent)}
+.section-header{text-align:center;margin-bottom:100px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,6rem);letter-spacing:4px;color:var(--primary);margin-bottom:20px;text-transform:uppercase;text-shadow:0 0 20px rgba(255,23,68,0.5)}
+.section-subtitle{font-size:1.4rem;color:#888;max-width:700px;margin:0 auto;letter-spacing:1px}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:50px;max-width:1400px;margin:0 auto;padding:0 30px}
+
+/* ADMIN PANEL */
+.admin-panel{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);z-index:3000;overflow-y:auto;padding:100px 30px 30px}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:50px;padding-bottom:30px;border-bottom:2px solid var(--gold)}
+.admin-title{font-family:'Bebas Neue';font-size:3rem;letter-spacing:4px;background:linear-gradient(135deg,var(--primary),var(--gold));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.close-admin{font-size:40px;cursor:pointer;color:var(--gold);transition:all 0.3s}
+.close-admin:hover{color:var(--primary)}
+.product-editor{margin-bottom:60px;padding:30px;background:var(--accent);border-radius:25px;border:1px solid var(--gold)}
+.editor-title{font-family:'Bebas Neue';font-size:2rem;color:var(--primary);margin-bottom:20px;letter-spacing:2px}
+.form-group{display:flex;gap:20px;align-items:center;margin-bottom:25px;flex-wrap:wrap}
+.form-group label{font-weight:600;color:#ccc;min-width:120px}
+.form-group input{padding:15px 20px;background:#222;border:1px solid var(--gold);border-radius:15px;color:var(--text);font-size:1.1rem;flex:1;max-width:300px;transition:all 0.3s}
+.form-group input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 20px rgba(255,23,68,0.3)}
+.save-btn{padding:15px 40px;background:linear-gradient(135deg,var(--primary),var(--red));color:#000;border:none;border-radius:20px;font-family:'Bebas Neue';font-size:1.2rem;font-weight:600;letter-spacing:2px;cursor:pointer;transition:all 0.3s;box-shadow:0 10px 30px rgba(255,23,68,0.4)}
+.save-btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(255,23,68,0.6)}
+.product-preview{margin-top:30px;padding:20px;background:#111;border-radius:15px;border-left:4px solid var(--gold)}
+.preview-title{font-weight:600;margin-bottom:10px;color:var(--gold)}
+
+/* PRODUCT CARD */
+.product-card{background:var(--accent);border-radius:25px;overflow:hidden;box-shadow:0 25px 80px rgba(0,0,0,0.5);transition:all 0.5s;cursor:pointer;border:1px solid rgba(255,215,0,0.2)}
+.product-card:hover{transform:translateY(-25px) rotateX(5deg);box-shadow:0 50px 120px rgba(255,23,68,0.4);border-color:var(--gold)}
+.product-image{height:450px;background-size:cover;background-position:center;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.product-image::before{content:'NEW';position:absolute;top:30px;left:30px;background:var(--primary);color:#000;padding:8px 20px;border-radius:25px;font-size:12px;font-weight:700;letter-spacing:2px;box-shadow:0 5px 15px rgba(255,23,68,0.5)}
+.product-image i{font-size:120px;color:rgba(255,255,255,0.1)}
+.product-info{padding:40px 35px;text-align:center}
+.product-name{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:3px;margin-bottom:15px;color:var(--text);text-transform:uppercase}
+.product-price{font-size:3.5rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--gold));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:30px;letter-spacing:2px}
+.add-cart{width:100%;padding:20px;background:linear-gradient(135deg,var(--primary),var(--red));color:#000;border:none;border-radius:40px;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;font-weight:400;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;box-shadow:0 10px 30px rgba(255,23,68,0.3)}
+.add-cart:hover{background:linear-gradient(135deg,var(--gold),#ffaa00);transform:scale(1.05);color:#000}
+
+/* CART MODAL */
+.cart-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:2000;justify-content:flex-end;padding:30px}
+.cart-panel{background:var(--accent);width:90%;max-width:500px;height:100vh;overflow-y:auto;animation:slideInRight 0.4s ease;border-left:3px solid var(--gold)}
+.cart-header{padding:40px 30px;background:linear-gradient(135deg,var(--primary),var(--red));display:flex;justify-content:space-between;align-items:center}
+.cart-header h2{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:2px;color:#000}
+.close-cart{font-size:30px;cursor:pointer;color:#000}
+.cart-items{padding:30px}
+.cart-item{display:flex;gap:20px;padding:25px 0;border-bottom:1px solid #333;align-items:center}
+.cart-img{width:90px;height:90px;border-radius:15px;object-fit:cover;flex-shrink:0;background:#333}
+.cart-details{flex:1}
+.cart-name{font-size:1.1rem;font-weight:600;margin-bottom:8px;color:var(--text)}
+.cart-price{font-size:1.4rem;color:var(--primary);font-weight:700}
+.quantity{display:flex;align-items:center;gap:15px;margin-top:10px}
+.qty-btn{background:#333;color:#fff;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:16px;transition:all 0.3s;border:1px solid var(--gold)}
+.qty-btn:hover{background:var(--primary);color:#000}
+.remove-item{color:var(--red);font-size:18px;cursor:pointer;transition:all 0.3s;margin-left:auto}
+.remove-item:hover{transform:scale(1.2);color:#ff6666}
+.cart-total{padding:30px;text-align:center;border-top:1px solid #333;margin-top:20px;background:#111;border-radius:20px}
+.total{font-size:2.5rem;font-weight:800;color:var(--primary);margin-bottom:25px;text-shadow:0 0 20px rgba(255,23,68,0.5)}
+.checkout-btn{width:100%;padding:22px;background:linear-gradient(135deg,var(--primary),var(--red));color:#000;border:none;border-radius:30px;font-size:1.4rem;font-weight:700;letter-spacing:2px;cursor:pointer;font-family:'Bebas Neue',sans-serif;border:2px solid var(--gold);transition:all 0.3s}
+.checkout-btn:hover{transform:scale(1.05);box-shadow:0 10px 40px rgba(255,23,68,0.5)}
+.empty-cart{text-align:center;padding:60px 30px;color:#888}
+
+/* ANIMATIONS */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
+@keyframes slideInRight{from{transform:translateX(100%)}to{transform:translateX(0)}}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+.header-content{padding:0 20px}
+.logo{font-size:28px}
+.nav-links{display:none}
+.hero{padding:120px 20px 80px}
+.products{padding:80px 0}
+.products-grid{gap:30px;padding:0 20px}
+.admin-panel{padding:80px 20px 20px}
+.form-group{flex-direction:column;align-items:stretch}
+.form-group label{min-width:auto;margin-bottom:8px}
+.cart-modal{padding:20px}
+.cart-panel{width:100%;max-width:100%}
+}
+</style>
+</head>
+<body>
+<!-- HEADER -->
+<header class="header">
+<div class="header-content">
+<div class="logo">
+<i class="fas fa-rabbit logo-icon"></i>
+Coelho Style
+</div>
+<nav class="nav-links">
+<a href="#home" class="nav-link">Home</a>
+<a href="#products" class="nav-link">Produtos</a>
+<a href="#about" class="nav-link">Sobre</a>
+<a href="#contact" class="nav-link">Contato</a>
+</nav>
+<div style="display:flex;gap:30px;align-items:center">
+<div class="cart-icon" onclick="toggleCart()">
+<i class="fas fa-shopping-bag"></i>
+<span class="cart-count" id="cartCount">0</span>
+</div>
+<div class="admin-toggle" onclick="toggleAdmin()">
+<i class="fas fa-cog"></i>
+<span class="admin-badge">ADMIN</span>
+</div>
+</div>
+</div>
+</header>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+<div class="admin-header">
+<h1 class="admin-title">Painel Admin</h1>
+<i class="fas fa-times close-admin" onclick="toggleAdmin()"></i>
+</div>
+
+<div class="product-editor">
+<h3 class="editor-title">Editar Produto 1</h3>
+<div class="form-group">
+<label>Nome:</label>
+<input type="text" id="prod1-name" value="Oversize Tee">
+</div>
+<div class="form-group">
+<label>Preço (R$):</label>
+<input type="number" id="prod1-price" value="189" step="0.01">
+</div>
+<div class="form-group">
+<label>Imagem URL:</label>
+<input type="url" id="prod1-image" value="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500">
+</div>
+<button class="save-btn" onclick="saveProduct(1)">Salvar Produto 1</button>
+<div class="product-preview">
+<div class="preview-title">Pré-visualização:</div>
+<div id="prod1-preview" style="font-size:1.1rem;color:var(--gold)">Oversize Tee - R$ 189,00</div>
+</div>
+</div>
+
+<div class="product-editor">
+<h3 class="editor-title">Editar Produto 2</h3>
+<div class="form-group">
+<label>Nome:</label>
+<input type="text" id="prod2-name" value="Hoodie Cargo">
+</div>
+<div class="form-group">
+<label>Preço (R$):</label>
+<input type="number" id="prod2-price" value="299" step="0.01">
+</div>
+<div class="form-group">
+<label>Imagem URL:</label>
+<input type="url" id="prod2-image" value="https://images.unsplash.com/photo-1587563871167-1ee9c731a7f0?w=500">
+</div>
+<button class="save-btn" onclick="saveProduct(2)">Salvar Produto 2</button>
+<div class="product-preview">
+<div class="preview-title">Pré-visualização:</div>
+<div id="prod2-preview" style="font-size:1.1rem;color:var(--gold)">Hoodie Cargo - R$ 299,00</div>
+</div>
+</div>
+
+<div class="product-editor">
+<h3 class="editor-title">Editar Produto 3</h3>
+<div class="form-group">
+<label>Nome:</label>
+<input type="text" id="prod3-name" value="Cargo Pants">
+</div>
+<div class="form-group">
+<label>Preço (R$):</label>
+<input type="number" id="prod3-price" value="249" step="0.01">
+</div>
+<div class="form-group">
+<label>Imagem URL:</label>
+<input type="url" id="prod3-image" value="https://images.unsplash.com/photo-1542272604-787c3835535d?w=500">
+</div>
+<button class="save-btn" onclick="saveProduct(3)">Salvar Produto 3</button>
+<div class="product-preview">
+<div class="preview-title">Pré-visualização:</div>
+<div id="prod3-preview" style="font-size:1.1rem;color:var(--gold)">Cargo Pants - R$ 249,00</div>
+</div>
+</div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+<h1 class="hero-title">Coelho Style</h1>
+<p class="hero-subtitle">Streetwear com pegada urbana e atitude 🐰</p>
+<button class="hero-cta" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">
+<i class="fas fa-arrow-down"></i>
+Explorar Coleção
+</button>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+<div class="section-header">
+<h2 class="section-title">Nova Coleção</h2>
+<p class="section-subtitle">Peças exclusivas com a vibe Coelho Style</p>
+</div>
+<div class="products-grid" id="productsGrid">
+<!-- Produtos serão carregados via JavaScript -->
+</div>
+</section>
+
+<!-- CART MODAL -->
+<div class="cart-modal" id="cartModal">
+<div class="cart-panel">
+<div class="cart-header">
+<h2>Seu Carrinho</h2>
+<i class="fas fa-times close-cart" onclick="toggleCart()"></i>
+</div>
+<div class="cart-items" id="cartItems">
+<div class="empty-cart">
+<i class="fas fa-shopping-bag" style="font-size:60px;margin-bottom:20px;opacity:0.3"></i>
+<p>Carrinho vazio</p>
+</div>
+</div>
+<div class="cart-total">
+<div class="total" id="cartTotal">R$ 0,00</div>
+<button class="checkout-btn" onclick="checkout()">Finalizar Compra</button>
+</div>
+</div>
+</div>
+
+<script>
+// Dados dos produtos
+let products = [
+{id: 1, name: 'Oversize Tee', price: 189, image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500', icon: 'fa-shirt'},
+{id: 2, name: 'Hoodie Cargo', price: 299, image: 'https://images.unsplash.com/photo-1587563871167-1ee9c731a7f0?w=500', icon: 'fa-hoodie'},
+{id: 3, name: 'Cargo Pants', price: 249, image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500', icon: 'fa-pants'}
+];
+
+let cart = [];
+
+// Carregar produtos do localStorage
+function loadProducts() {
+const saved = localStorage.getItem('coelhoProducts');
+if (saved) products = JSON.parse(saved);
+renderProducts();
+}
+
+// Salvar produto do painel admin
+function saveProduct(id) {
+const name = document.getElementById(`prod${id}-name`).value;
+const price = parseFloat(document.getElementById(`prod${id}-price`).value);
+const image = document.getElementById(`prod${id}-image`).value;
+
+const product = products.find(p => p.id === id);
+if (product) {
+product.name = name;
+product.price = price;
+product.image = image;
+localStorage.setItem('coelhoProducts', JSON.stringify(products));
+document.getElementById(`prod${id}-preview`).textContent = `${name} - R$ ${price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+renderProducts();
+alert('Produto atualizado com sucesso!');
+}
+}
+
+// Renderizar produtos
+function renderProducts() {
+const grid = document.getElementById('productsGrid');
+grid.innerHTML = products.map(product => `
+<div class="product-card">
+<div class="product-image" style="background-image:url('${product.image}')">
+<i class="fas ${product.icon}"></i>
+</div>
+<div class="product-info">
+<h3 class="product-name">${product.name}</h3>
+<p class="product-price">R$ ${product.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+<button class="add-cart" onclick="addToCart(${product.id})">Adicionar</button>
+</div>
+</div>
+`).join('');
+}
+
+// Adicionar ao carrinho
+function addToCart(productId) {
+const product = products.find(p => p.id === productId);
+const cartItem = cart.find(item => item.id === productId);
+
+if (cartItem) {
+cartItem.quantity++;
+} else {
+cart.push({...product, quantity: 1});
+}
+
+updateCart();
+}
+
+// Remover do carrinho
+function removeFromCart(productId) {
+cart = cart.filter(item => item.id !== productId);
+updateCart();
+}
+
+// Atualizar quantidade
+function updateQuantity(productId, change) {
+const item = cart.find(item => item.id === productId);
+if (item) {
+item.quantity += change;
+if (item.quantity <= 0) removeFromCart(productId);
+else updateCart();
+}
+}
+
+// Atualizar carrinho
+function updateCart() {
+const cartItems = document.getElementById('cartItems');
+const cartCount = document.getElementById('cartCount');
+
+if (cart.length === 0) {
+cartItems.innerHTML = '<div class="empty-cart"><i class="fas fa-shopping-bag" style="font-size:60px;margin-bottom:20px;opacity:0.3"></i><p>Carrinho vazio</p></div>';
+cartCount.textContent = '0';
+} else {
+cartItems.innerHTML = cart.map(item => `
+<div class="cart-item">
+<img src="${item.image}" alt="${item.name}" class="cart-img">
+<div class="cart-details">
+<div class="cart-name">${item.name}</div>
+<div class="cart-price">R$ ${item.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+<div class="quantity">
+<button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+<span>${item.quantity}</span>
+<button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+</div>
+</div>
+<i class="fas fa-trash remove-item" onclick="removeFromCart(${item.id})"></i>
+</div>
+`).join('');
+cartCount.textContent = cart.length;
+}
+
+const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+document.getElementById('cartTotal').textContent = `R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+}
+
+// Alternar painel admin
+function toggleAdmin() {
+document.getElementById('adminPanel').style.display = 
+document.getElementById('adminPanel').style.display === 'block' ? 'none' : 'block';
+}
+
+// Alternar carrinho
+function toggleCart() {
+document.getElementById('cartModal').style.display = 
+document.getElementById('cartModal').style.display === 'flex' ? 'none' : 'flex';
+}
+
+// Finalizar compra
+function checkout() {
+if (cart.length === 0) {
+alert('Carrinho vazio!');
+return;
+}
+const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+alert(`Compra de R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits: 2})} realizada com sucesso! 🎉`);
+cart = [];
+updateCart();
+toggleCart();
+}
+
+// Inicializar
+document.addEventListener('DOMContentLoaded', loadProducts);
+</script>
+</body>
+</html>
